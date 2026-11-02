@@ -1,6 +1,7 @@
--- Creación de la base de datos para RADAR STOCK
-CREATE DATABASE IF NOT EXISTS radar_stock_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE radar_stock_db;
+-- ==========================================================
+-- RADAR STOCK - Esquema de Base de Datos
+-- Compatible con entornos locales (XAMPP) y hosting (Hostinger)
+-- ==========================================================
 
 -- 1. Tabla de Usuarios y Roles (Administradores, Vendedores, Colaboradores)
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -21,8 +22,11 @@ CREATE TABLE IF NOT EXISTS productos (
     precio_venta DECIMAL(10,2) NOT NULL,
     stock_actual INT NOT NULL DEFAULT 0,
     stock_minimo INT NOT NULL DEFAULT 5, -- Alerta temprana para evitar quiebres
+    stock_deseado INT NOT NULL DEFAULT 0, -- Stock ideal para alertas y reposición
     fecha_vencimiento DATE DEFAULT NULL, -- Control de mermas por caducidad
-    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_productos_nombre (nombre_producto),
+    INDEX idx_productos_vencimiento (fecha_vencimiento)
 );
 
 -- 3. Tabla de Ventas (Módulo de salida rápida)
@@ -31,7 +35,8 @@ CREATE TABLE IF NOT EXISTS ventas (
     usuario_id INT,
     total_venta DECIMAL(10,2) NOT NULL,
     fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    INDEX idx_ventas_fecha (fecha_venta)
 );
 
 -- 4. Detalle de la Venta (Productos asociados a cada transacción)

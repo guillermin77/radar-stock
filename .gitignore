@@ -1,0 +1,17 @@
+# Configuración privada de backend
+backend-api/config/config.php
+
+# Entregables y firmas de Android
+*.apk
+*.jks
+*.keystore
+
+# Archivos locales y de compilación de Android Studio / Gradle
+local.properties
+build/
+.gradle/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
