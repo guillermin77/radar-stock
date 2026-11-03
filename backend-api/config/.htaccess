@@ -1,0 +1,3 @@
+# Acceso denegado directamente por el servidor web
+Require all denied
+
