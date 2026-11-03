@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".RadarStockApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,9 +17,9 @@
         android:theme="@style/Theme.RadarStock"
         android:networkSecurityConfig="@xml/network_security_config">
 
-        <!-- Pantalla Inicial: Listado de Productos -->
+        <!-- Pantalla de Inicio: LoginActivity (dirige al menú si ya hay sesión) -->
         <activity
-            android:name=".views.ProductosActivity"
+            android:name=".views.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -26,6 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Menú Principal -->
+        <activity
+            android:name=".views.MenuActivity"
+            android:exported="false" />
+
+        <!-- Inventario de Productos -->
+        <activity
+            android:name=".views.ProductosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".MainActivity"

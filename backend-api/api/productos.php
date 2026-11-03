@@ -7,11 +7,15 @@
 
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/respuesta.php';
+require_once __DIR__ . '/../includes/auth.php';
 
 // Validar que la petición sea GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     responderError('Método no permitido. Este endpoint solo acepta peticiones GET.', 405);
 }
+
+// Proteger la ruta: requiere sesión activa con cualquier rol
+$usuarioAutenticado = autenticar();
 
 try {
     $pdo = getDBConnection();

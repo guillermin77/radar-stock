@@ -37,6 +37,10 @@ class ProductosActivity : AppCompatActivity() {
     }
 
     private fun configurarEventos() {
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         binding.btnReintentar.setOnClickListener {
             cargarProductos()
         }

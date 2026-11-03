@@ -10,7 +10,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     correo VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     rol ENUM('Administrador', 'Vendedor', 'Colaborador') DEFAULT 'Vendedor',
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    token VARCHAR(64) NULL,
+    token_expira DATETIME NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_usuarios_token (token)
 );
 
 -- 2. Tabla de Productos (Control de stock y caducidad)
