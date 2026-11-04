@@ -11,11 +11,14 @@ import java.text.NumberFormat
 import java.util.Locale
 
 /**
- * Adaptador para listar los productos en el RecyclerView usando ViewBinding
+ * Adaptador para listar los productos en el RecyclerView usando ViewBinding.
+ * Incluye soporte para clics en elementos y paginación incremental.
  */
 class ProductoAdapter(
-    private var productos: List<Producto> = emptyList()
+    private var onProductoClick: ((Producto) -> Unit)? = null
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
+
+    private val productos = mutableListOf<Producto>()
 
     private val formatoMoneda = NumberFormat.getCurrencyInstance(Locale("es", "CL")).apply {
         maximumFractionDigits = 0
@@ -35,24 +38,29 @@ class ProductoAdapter(
                 binding.tvCategoria.visibility = View.GONE
             }
 
-            // Stock actual con alerta visual si está agotado o bajo
+            // Stock actual: alerta en ROJO (#DC2626) si es 0
             when {
                 producto.stockActual == 0 -> {
-                    binding.tvStock.text = "Agotado (0 unid.)"
-                    binding.tvStock.setTextColor(Color.parseColor("#DC2626")) // Rojo
+                    binding.tvStock.text = "Sin stock (0 unid.)"
+                    binding.tvStock.setTextColor(Color.parseColor("#DC2626"))
                 }
                 producto.stockActual <= producto.stockMinimo -> {
                     binding.tvStock.text = "Stock bajo: ${producto.stockActual} unid. (mín. ${producto.stockMinimo})"
-                    binding.tvStock.setTextColor(Color.parseColor("#D97706")) // Naranja
+                    binding.tvStock.setTextColor(Color.parseColor("#D97706"))
                 }
                 else -> {
                     binding.tvStock.text = "Stock: ${producto.stockActual} unidades"
-                    binding.tvStock.setTextColor(Color.parseColor("#374151"))
+                    binding.tvStock.setTextColor(Color.parseColor("#334155"))
                 }
             }
 
             // Precio formateado
             binding.tvPrecio.text = formatoMoneda.format(producto.precioVenta)
+
+            // Evento clic en el producto
+            binding.root.setOnClickListener {
+                onProductoClick?.invoke(producto)
+            }
         }
     }
 
@@ -71,9 +79,21 @@ class ProductoAdapter(
 
     override fun getItemCount(): Int = productos.size
 
+    fun setOnProductoClickListener(listener: (Producto) -> Unit) {
+        this.onProductoClick = listener
+    }
+
     fun actualizarLista(nuevaLista: List<Producto>) {
-        productos = nuevaLista
+        productos.clear()
+        productos.addAll(nuevaLista)
         notifyDataSetChanged()
     }
-}
 
+    fun agregarProductos(nuevos: List<Producto>) {
+        val posicionInicio = productos.size
+        productos.addAll(nuevos)
+        notifyItemRangeInserted(posicionInicio, nuevos.size)
+    }
+
+    fun obtenerLista(): List<Producto> = productos
+}
