@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp"
+    app:strokeColor="#E2E8F0"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Posición en el Ranking (1 al 10) -->
+        <TextView
+            android:id="@+id/tvRanking"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="#EFF6FF"
+            android:gravity="center"
+            android:textColor="#1E3A8A"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#1" />
+
+        <!-- Nombre del Producto -->
+        <TextView
+            android:id="@+id/tvNombreProductoTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#0F172A"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvMontoTop"
+            app:layout_constraintStart_toEndOf="@+id/tvRanking"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Bebida Coca-Cola Original 1.5L" />
+
+        <!-- Unidades vendidas -->
+        <TextView
+            android:id="@+id/tvUnidadesTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/tvRanking"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreProductoTop"
+            tools:text="6 unidades vendidas" />
+
+        <!-- Monto total generado -->
+        <TextView
+            android:id="@+id/tvMontoTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1E3A8A"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$10.800" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

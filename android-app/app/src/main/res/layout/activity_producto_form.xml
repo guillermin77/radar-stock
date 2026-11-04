@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Barra Superior / Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E3A8A"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@android:color/white"
+            app:title="Crear Producto"
+            app:titleTextColor="@android:color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Banner de Error API -->
+                <TextView
+                    android:id="@+id/tvErrorBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="#FEE2E2"
+                    android:padding="12dp"
+                    android:textColor="#DC2626"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:text="Ese código de barras ya existe."
+                    tools:visibility="visible" />
+
+                <!-- Campo: Nombre del Producto -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNombre"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre del producto *"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences"
+                        android:maxLines="2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Campo: Categoría (Desplegable con opción Nueva Categoría) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCategoria"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="Categoría"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actvCategoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fila: Precio de Venta y Código de Barras -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal">
+
+                    <!-- Precio de Venta -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPrecio"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:hint="Precio de venta *"
+                        app:boxBackgroundColor="#FFFFFF"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:prefixText="$ ">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPrecio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Código de Barras -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCodigoBarras"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:hint="Código de barras"
+                        app:boxBackgroundColor="#FFFFFF"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:helperText="Opcional">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCodigoBarras"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Stock Inicial / Actual -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStockActual"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="Stock inicial"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:helperText="Total de partida para el producto">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStockActual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:text="0" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fila: Stock Mínimo y Stock Deseado -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal">
+
+                    <!-- Stock Mínimo -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilStockMinimo"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:hint="Stock mínimo"
+                        app:boxBackgroundColor="#FFFFFF"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:helperText="Alerta reposición">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etStockMinimo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:text="5" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Stock Deseado -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilStockDeseado"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:hint="Stock deseado"
+                        app:boxBackgroundColor="#FFFFFF"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:helperText="Objetivo ideal">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etStockDeseado"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:text="0" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Fecha de Vencimiento -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFechaVencimiento"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="Fecha de vencimiento (AAAA-MM-DD)"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                    app:endIconMode="custom">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFechaVencimiento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Casilla «No vence» -->
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cbNoVence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:checked="true"
+                    android:text="No vence (sin fecha de caducidad)"
+                    android:textColor="#334155" />
+
+                <!-- Indicador de Carga al Guardar -->
+                <ProgressBar
+                    android:id="@+id/pbGuardando"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:indeterminateTint="#1E3A8A"
+                    android:visibility="gone" />
+
+                <!-- Botón Guardar -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#1E3A8A"
+                    android:text="Guardar Producto"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
+                <!-- Botón Eliminar (Solo visible al editar) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEliminar"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Eliminar Producto"
+                    android:textColor="#DC2626"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:cornerRadius="8dp"
+                    app:strokeColor="#DC2626"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

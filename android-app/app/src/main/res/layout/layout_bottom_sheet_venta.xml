@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <!-- Indicador visual superior para arrastrar el BottomSheet -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#CBD5E1" />
+
+    <!-- Encabezado del Detalle: Título y botón Vaciar Venta -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/tvTituloDetalle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Detalle de la Venta"
+            android:textColor="#0F172A"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVaciarVenta"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vaciar venta"
+            android:textColor="#DC2626"
+            app:icon="@drawable/ic_delete"
+            app:iconTint="#DC2626" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E2E8F0" />
+
+    <!-- Mensaje cuando la venta está vacía -->
+    <TextView
+        android:id="@+id/tvVentaVaciaModal"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:text="No hay productos en la venta actual.\nToca un producto del catálogo para agregarlo."
+        android:textColor="#64748B"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+    <!-- Lista de productos en la venta -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItemsDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:maxHeight="320dp"
+        android:nestedScrollingEnabled="true"
+        tools:listitem="@layout/item_venta_detalle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#E2E8F0" />
+
+    <!-- Resumen del Total -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:id="@+id/tvResumenCantidadModal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total a pagar:"
+            android:textColor="#475569"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalMontoModal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1E3A8A"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="$5.400" />
+    </LinearLayout>
+
+    <!-- Botón Principal: Confirmar Venta -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirmarVentaModal"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#1E3A8A"
+        android:text="Confirmar venta"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_cart"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white" />
+
+    <!-- Spinner de progreso durante la confirmación -->
+    <ProgressBar
+        android:id="@+id/pbConfirmandoModal"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:indeterminateTint="#1E3A8A"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+</LinearLayout>
+

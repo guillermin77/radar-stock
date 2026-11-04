@@ -10,7 +10,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     correo VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     rol ENUM('Administrador', 'Vendedor', 'Colaborador') DEFAULT 'Vendedor',
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    token VARCHAR(64) NULL,
+    token_expira DATETIME NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_usuarios_token (token)
 );
 
 -- 2. Tabla de Productos (Control de stock y caducidad)
@@ -34,8 +37,10 @@ CREATE TABLE IF NOT EXISTS ventas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT,
     total_venta DECIMAL(10,2) NOT NULL,
+    codigo_operacion VARCHAR(36) NULL,
     fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    UNIQUE INDEX idx_ventas_codigo_operacion (codigo_operacion),
     INDEX idx_ventas_fecha (fecha_venta)
 );
 
