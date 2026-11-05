@@ -11,6 +11,7 @@
  * 4. Descuenta stock atómicamente con 'AND stock_actual >= ?'. Si falta stock, revierte todo y responde 409.
  * 5. Precios calculados exclusivamente en el servidor desde la base de datos (nunca desde el cliente).
  * 6. Fecha calculada en PHP con la zona horaria 'America/Santiago'.
+ * 7. Al confirmar la venta, devuelve el campo 'alertas_nuevas' con las alertas de stock (agotado, critico, bajo) de los productos vendidos.
  */
 
 require_once __DIR__ . '/../includes/db.php';
@@ -70,9 +71,10 @@ try {
         if ($ventaExistente) {
             // Responder con la venta ya registrada sin duplicar ni descontar stock nuevamente
             responderJson([
-                'venta_id' => (int) $ventaExistente['id'],
-                'total'    => (float) $ventaExistente['total_venta'],
-                'fecha'    => $ventaExistente['fecha_venta']
+                'venta_id'       => (int) $ventaExistente['id'],
+                'total'          => (float) $ventaExistente['total_venta'],
+                'fecha'          => $ventaExistente['fecha_venta'],
+                'alertas_nuevas' => []
             ], 200);
         }
     }
@@ -80,23 +82,24 @@ try {
     // 3. Iniciar Transacción Atómica
     $pdo->beginTransaction();
 
-    // Ordenar productos por ID ascendente para garantizar orden determinista y evitar bloqueos mutuos (deadlocks)
-    ksort($itemsConsolidados);
+    // Ordenar productos por ID ascendente para evitar bloqueos mutuos (deadlocks)
+    ksort($itemsConsolidados, SORT_NUMERIC);
 
     $totalVenta = 0.0;
     $detallesParaInsertar = [];
 
-    $stmtConsultaProducto = $pdo->prepare('SELECT id, nombre_producto, precio_venta, stock_actual FROM productos WHERE id = ? FOR UPDATE');
+    // Preparar sentencias
+    $stmtConsultarProducto = $pdo->prepare('SELECT id, nombre_producto, precio_venta, stock_actual, stock_minimo, stock_deseado FROM productos WHERE id = ? FOR UPDATE');
     $stmtDescontarStock = $pdo->prepare('UPDATE productos SET stock_actual = stock_actual - ? WHERE id = ? AND stock_actual >= ?');
 
     foreach ($itemsConsolidados as $productoId => $cantidad) {
         // Consultar producto y bloquear fila
-        $stmtConsultaProducto->execute([$productoId]);
-        $producto = $stmtConsultaProducto->fetch();
+        $stmtConsultarProducto->execute([$productoId]);
+        $producto = $stmtConsultarProducto->fetch();
 
         if (!$producto) {
             $pdo->rollBack();
-            responderError("Producto con ID $productoId no encontrado.", 404);
+            responderError("Producto con ID $productoId no existe en el catálogo.", 404);
         }
 
         // Descontar stock con validación de suficiencia
@@ -147,11 +150,69 @@ try {
     // Confirmar la transacción
     $pdo->commit();
 
-    // Responder con los datos de la venta confirmada
+    // 5. Consultar alertas de stock para los productos que se acaban de vender
+    $alertasNuevas = [];
+    if (!empty($detallesParaInsertar)) {
+        $idsVendidos = array_values(array_unique(array_column($detallesParaInsertar, 'producto_id')));
+        $placeholders = implode(',', array_fill(0, count($idsVendidos), '?'));
+
+        $sqlAlertas = "SELECT id AS producto_id, nombre_producto, stock_actual, stock_minimo, stock_deseado, fecha_vencimiento
+                       FROM productos
+                       WHERE id IN ($placeholders)";
+        $stmtAlertas = $pdo->prepare($sqlAlertas);
+        $stmtAlertas->execute($idsVendidos);
+        $productosVendidos = $stmtAlertas->fetchAll();
+
+        foreach ($productosVendidos as $p) {
+            $stockActual = (int) $p['stock_actual'];
+            $stockMinimo = (int) $p['stock_minimo'];
+            $stockDeseado = (int) $p['stock_deseado'];
+            $nombre = $p['nombre_producto'];
+
+            $tipo = null;
+            $mensaje = '';
+
+            if ($stockActual === 0) {
+                $tipo = 'agotado';
+                $mensaje = "Sin stock: $nombre se agotó.";
+            } elseif ($stockActual > 0 && $stockDeseado > 0 && $stockActual <= ($stockDeseado * 0.25)) {
+                $tipo = 'critico';
+                $mensaje = "Stock crítico: $nombre está por agotarse ($stockActual unidades).";
+            } elseif ($stockActual <= $stockMinimo) {
+                $tipo = 'bajo';
+                $mensaje = "Stock bajo: $nombre tiene $stockActual unidades (mínimo $stockMinimo). Conviene reponer.";
+            }
+
+            if ($tipo !== null) {
+                $alertasNuevas[] = [
+                    'producto_id'       => (int) $p['producto_id'],
+                    'nombre_producto'   => $nombre,
+                    'tipo'              => $tipo,
+                    'mensaje'           => $mensaje,
+                    'stock_actual'      => $stockActual,
+                    'stock_minimo'      => $stockMinimo,
+                    'stock_deseado'     => $stockDeseado,
+                    'fecha_vencimiento' => $p['fecha_vencimiento'] ?: null,
+                    'dias_para_vencer'  => null
+                ];
+            }
+        }
+
+        // Orden por gravedad (agotado, critico, bajo) y luego por nombre
+        usort($alertasNuevas, function($a, $b) {
+            $prioridad = ['agotado' => 1, 'critico' => 2, 'bajo' => 3];
+            $cmp = ($prioridad[$a['tipo']] ?? 99) <=> ($prioridad[$b['tipo']] ?? 99);
+            if ($cmp !== 0) return $cmp;
+            return strcmp($a['nombre_producto'], $b['nombre_producto']);
+        });
+    }
+
+    // Responder con los datos de la venta confirmada y alertas nuevas
     responderJson([
-        'venta_id' => $ventaId,
-        'total'    => (float) $totalVenta,
-        'fecha'    => $fechaVenta
+        'venta_id'       => $ventaId,
+        'total'          => (float) $totalVenta,
+        'fecha'          => $fechaVenta,
+        'alertas_nuevas' => $alertasNuevas
     ], 201);
 
 } catch (Exception $e) {
@@ -161,4 +222,3 @@ try {
     error_log('Error en ventas.php: ' . $e->getMessage());
     responderError('Error interno al registrar la venta: ' . $e->getMessage(), 500);
 }
-

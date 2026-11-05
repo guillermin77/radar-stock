@@ -22,6 +22,7 @@ import com.radarstock.app.models.RespuestaApi
 import com.radarstock.app.models.VentaItemRequest
 import com.radarstock.app.models.VentaRequest
 import com.radarstock.app.network.RetrofitClient
+import com.radarstock.app.utils.NotificationHelper
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -125,6 +126,7 @@ class VentaActivity : AppCompatActivity() {
             mostrarDetalleVenta()
         }
         actualizarResumen()
+
     }
 
     private fun configurarEventos() {
@@ -327,6 +329,9 @@ class VentaActivity : AppCompatActivity() {
                     "Venta registrada: $totalFinal",
                     Toast.LENGTH_LONG
                 ).show()
+
+                // Procesar notificaciones locales de stock si hay alertas nuevas
+                NotificationHelper.procesarYNotificarAlertas(this@VentaActivity, respuesta.alertasNuevas)
 
                 // Vaciar la venta actual y generar un nuevo código de operación para la siguiente venta
                 carrito.clear()

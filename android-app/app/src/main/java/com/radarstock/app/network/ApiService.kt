@@ -1,10 +1,12 @@
 package com.radarstock.app.network
 
+import com.radarstock.app.models.Alerta
 import com.radarstock.app.models.LoginRequest
 import com.radarstock.app.models.LoginResponse
 import com.radarstock.app.models.Producto
 import com.radarstock.app.models.ProductoRequest
 import com.radarstock.app.models.RespuestaApi
+import com.radarstock.app.models.ResumenAlertasResponse
 import com.radarstock.app.models.ResumenResponse
 import com.radarstock.app.models.StockRequest
 import com.radarstock.app.models.StockResponse
@@ -94,4 +96,20 @@ interface ApiService {
         @Query("desde") desde: String? = null,
         @Query("hasta") hasta: String? = null
     ): ResumenResponse
+
+    /**
+     * Obtiene el listado de alertas de stock y vencimiento con filtros y paginación.
+     */
+    @GET("api/alertas.php")
+    suspend fun getAlertas(
+        @Query("tipo") tipo: String? = null,
+        @Query("pagina") pagina: Int = 1,
+        @Query("limite") limite: Int = 50
+    ): List<Alerta>
+
+    /**
+     * Obtiene el resumen de conteos de alertas {agotados, criticos, bajos, por_vencer, vencidos, total}.
+     */
+    @GET("api/alertas.php?resumen=1")
+    suspend fun getResumenAlertas(): ResumenAlertasResponse
 }

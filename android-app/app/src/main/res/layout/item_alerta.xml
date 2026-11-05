@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardAlerta"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#E2E8F0"
+    app:cardBackgroundColor="#FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Barra lateral de color / Ícono de Alerta -->
+        <LinearLayout
+            android:id="@+id/layoutIconoAlerta"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:background="@drawable/bg_badge_alerta"
+            android:layout_gravity="top"
+            android:layout_marginEnd="12dp">
+
+            <ImageView
+                android:id="@+id/ivIconoAlerta"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:contentDescription="Icono de alerta"
+                app:tint="#DC2626"
+                app:srcCompat="@drawable/ic_alerta_vencido" />
+        </LinearLayout>
+
+        <!-- Contenido de la Alerta -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Fila Superior: Etiqueta textual del tipo + Nombre de Producto -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:id="@+id/tvEtiquetaTipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_alerta"
+                    android:paddingStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="2dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    tools:text="[VENCIDO]"
+                    tools:backgroundTint="#DC2626" />
+
+                <TextView
+                    android:id="@+id/tvNombreProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Leche Entera 1L" />
+            </LinearLayout>
+
+            <!-- Mensaje Descriptivo de la Alerta -->
+            <TextView
+                android:id="@+id/tvMensajeAlerta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#334155"
+                android:lineSpacingExtra="2dp"
+                tools:text="Stock bajo: Leche Entera 1L tiene 8 unidades (mínimo 10). Conviene reponer." />
+
+            <!-- Fila de Detalles Técnicos de Stock / Vencimiento -->
+            <LinearLayout
+                android:id="@+id/layoutDetalles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvDetalleStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#64748B"
+                    tools:text="Stock: 8 / Mín: 10 / Des: 30" />
+
+                <TextView
+                    android:id="@+id/tvDetalleVencimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:textSize="12sp"
+                    android:textColor="#64748B"
+                    tools:text="Vence: 20-11-2026" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

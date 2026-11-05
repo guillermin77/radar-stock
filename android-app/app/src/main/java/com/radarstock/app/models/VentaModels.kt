@@ -42,7 +42,10 @@ data class VentaResponse(
     val total: Double? = null,
 
     @SerializedName("fecha")
-    val fecha: String? = null
+    val fecha: String? = null,
+
+    @SerializedName("alertas_nuevas")
+    val alertasNuevas: List<Alerta>? = null
 )
 
 /**
@@ -55,4 +58,3 @@ data class ItemVenta(
     val subtotal: Double
         get() = producto.precioVenta * cantidad
 }
-

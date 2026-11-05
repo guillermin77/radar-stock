@@ -21,6 +21,7 @@ import com.radarstock.app.models.Producto
 import com.radarstock.app.models.StockRequest
 import com.radarstock.app.network.RetrofitClient
 import com.radarstock.app.utils.SessionManager
+import com.radarstock.app.utils.NotificationHelper
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
@@ -29,6 +30,7 @@ import java.util.Locale
  * Pantalla de detalle de producto.
  * Muestra información completa. El Administrador cuenta con acciones de edición y aumento
  * de stock en tiempo real con confirmación, mientras que el Vendedor tiene acceso de solo consulta.
+ * Permite recibir tanto el objeto Producto serializado como un producto_id para cargarlo remotamente.
  */
 class DetalleProductoActivity : AppCompatActivity() {
 
@@ -53,17 +55,23 @@ class DetalleProductoActivity : AppCompatActivity() {
         binding = ActivityDetalleProductoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        configurarToolbar()
+
         productoActual = intent.getSerializableExtra("producto") as? Producto
         val prod = productoActual
-        if (prod == null) {
-            Toast.makeText(this, "Error al cargar datos del producto", Toast.LENGTH_SHORT).show()
-            finish()
-            return
+        if (prod != null) {
+            mostrarDatosProducto(prod)
+            configurarAccionesSegunRol()
+        } else {
+            val productoId = intent.getIntExtra("producto_id", -1)
+            if (productoId != -1) {
+                configurarAccionesSegunRol()
+                cargarProductoPorId(productoId)
+            } else {
+                Toast.makeText(this, "Error al cargar datos del producto", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
-
-        configurarToolbar()
-        mostrarDatosProducto(prod)
-        configurarAccionesSegunRol()
     }
 
     private fun configurarToolbar() {
@@ -79,6 +87,23 @@ class DetalleProductoActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    private fun cargarProductoPorId(productoId: Int) {
+        lifecycleScope.launch {
+            try {
+                val producto = RetrofitClient.apiService.getProductoPorId(productoId)
+                productoActual = producto
+                mostrarDatosProducto(producto)
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@DetalleProductoActivity,
+                    "Error al cargar producto: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
     }
 
     private fun mostrarDatosProducto(producto: Producto) {
@@ -221,6 +246,7 @@ class DetalleProductoActivity : AppCompatActivity() {
                 ).show()
 
                 // Notificar que hubo cambios de stock
+                NotificationHelper.limpiarEstadoAlerta(this@DetalleProductoActivity, productoId)
                 setResult(Activity.RESULT_OK)
 
             } catch (e: Exception) {
