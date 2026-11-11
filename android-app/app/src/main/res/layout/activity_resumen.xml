@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayoutResumen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Barra Superior / Encabezado Corporativo -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarResumen"
+            style="@style/RadarStock_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/white"
+            app:subtitle="Métricas financieras del negocio"
+            app:subtitleTextColor="#CCFFFFFF"
+            app:title="Resumen de Ventas"
+            app:titleTextColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Fila de Filtros de Período -->
+        <HorizontalScrollView
+            android:id="@+id/scrollPeriodos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/screen_margin_horizontal"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/toolbarResumen">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupPeriodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHoy"
+                    style="@style/RadarStock_Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Hoy" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip7Dias"
+                    style="@style/RadarStock_Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7 días" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMes"
+                    style="@style/RadarStock_Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Este mes" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRango"
+                    style="@style/RadarStock_Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rango" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <!-- Panel de Selectores de Fecha para Rango Personalizado -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layoutSelectorRango"
+            style="@style/RadarStock_Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/scrollPeriodos"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFechaDesde"
+                    style="@style/RadarStock_Button_Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:minHeight="44dp"
+                    android:textSize="12sp"
+                    tools:text="Desde: 2026-11-01" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="a"
+                    android:textColor="@color/text_secondary"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFechaHasta"
+                    style="@style/RadarStock_Button_Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:minHeight="44dp"
+                    android:textSize="12sp"
+                    tools:text="Hasta: 2026-11-04" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAplicarRango"
+                    style="@style/RadarStock_Button_Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:minHeight="44dp"
+                    android:paddingHorizontal="14dp"
+                    android:text="Ver"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Tarjetas de Resumen Global (Métricas con Cifra Grande en Azul Marino) -->
+        <LinearLayout
+            android:id="@+id/layoutTarjetasResumen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutSelectorRango">
+
+            <!-- Tarjeta Total Vendido -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/RadarStock_Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.05"
+                        android:text="TOTAL VENDIDO"
+                        android:textColor="@color/text_placeholder"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTotalVendidoMonto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="@color/navy_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="$15.000" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Tarjeta Cantidad de Ventas -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/RadarStock_Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.05"
+                        android:text="CANTIDAD VENTAS"
+                        android:textColor="@color/text_placeholder"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCantidadVentasTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="@color/navy_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="3 ventas" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Subtítulo de Sección Top 10 -->
+        <TextView
+            android:id="@+id/tvTituloTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Los 10 Productos Más Vendidos"
+            android:textColor="@color/navy_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTarjetasResumen" />
+
+        <!-- Rango de Fechas Activo -->
+        <TextView
+            android:id="@+id/tvRangoFechasActivo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_placeholder"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTituloTop"
+            tools:text="Período: 2026-11-04 00:00:00 al 2026-11-04 23:59:59" />
+
+        <!-- Lista RecyclerView de los 10 productos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTopProductos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRangoFechasActivo"
+            tools:listitem="@layout/item_resumen_producto" />
+
+        <!-- Indicador de Carga -->
+        <ProgressBar
+            android:id="@+id/pbCargandoResumen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="@color/navy_primary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTarjetasResumen"
+            tools:visibility="gone" />
+
+        <!-- Mensaje de Sin Ventas en el Período -->
+        <LinearLayout
+            android:id="@+id/layoutSinVentas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTarjetasResumen"
+            tools:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No se registraron ventas en este período"
+                android:textColor="@color/text_secondary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Seleccione otro período o registre ventas en el módulo de Venta."
+                android:textColor="@color/text_placeholder"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Mensaje de Error de Conexión -->
+        <LinearLayout
+            android:id="@+id/layoutErrorConexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTarjetasResumen"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvMensajeErrorResumen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Error al conectar con el servidor."
+                android:textColor="@color/status_danger"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReintentarResumen"
+                style="@style/RadarStock_Button_Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Reintentar" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

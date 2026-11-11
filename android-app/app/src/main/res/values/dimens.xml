@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Márgenes y Espaciado de Pantalla -->
+    <dimen name="screen_margin_horizontal">16dp</dimen>
+    <dimen name="screen_margin_vertical">16dp</dimen>
+    <dimen name="screen_padding_large">24dp</dimen>
+
+    <!-- Espaciado Modular -->
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_between_cards">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">20dp</dimen>
+    <dimen name="spacing_xlarge">24dp</dimen>
+    <dimen name="spacing_xxlarge">32dp</dimen>
+
+    <!-- Tarjetas (MaterialCardView) -->
+    <dimen name="card_corner_radius">14dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_stroke_width">1dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_padding_compact">12dp</dimen>
+
+    <!-- Entradas de Texto (TextInputLayout / TextInputEditText) -->
+    <dimen name="input_corner_radius">12dp</dimen>
+    <dimen name="input_stroke_width">1dp</dimen>
+    <dimen name="input_stroke_focused">2dp</dimen>
+    <dimen name="input_min_height">56dp</dimen>
+
+    <!-- Botones -->
+    <dimen name="btn_height">52dp</dimen>
+    <dimen name="btn_height_compact">44dp</dimen>
+    <dimen name="btn_corner_radius">14dp</dimen>
+    <dimen name="btn_stroke_width">1.5dp</dimen>
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="menu_card_height">112dp</dimen>
+    <dimen name="menu_alertas_height">80dp</dimen>
+
+    <!-- Padding inferior para listas (evita que el FAB tape el último elemento) -->
+    <dimen name="list_bottom_padding">96dp</dimen>
+
+    <!-- Tipografía -->
+    <dimen name="text_title_toolbar">20sp</dimen>
+    <dimen name="text_title_large">22sp</dimen>
+    <dimen name="text_title_hero">26sp</dimen>
+    <dimen name="text_subtitle">16sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_large">16sp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+    <dimen name="text_badge">11sp</dimen>
+</resources>
+

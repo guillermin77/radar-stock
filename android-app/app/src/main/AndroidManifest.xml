@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso obligatorio para llamadas a la API -->
+    <!-- Permisos obligatorios -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".RadarStockApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,9 +19,9 @@
         android:theme="@style/Theme.RadarStock"
         android:networkSecurityConfig="@xml/network_security_config">
 
-        <!-- Pantalla Inicial: Listado de Productos -->
+        <!-- Pantalla de Inicio: LoginActivity (dirige al menú si ya hay sesión) -->
         <activity
-            android:name=".views.ProductosActivity"
+            android:name=".views.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -26,6 +29,107 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Menú Principal -->
+        <activity
+            android:name=".views.MenuActivity"
+            android:exported="false" />
+
+        <!-- Servicio de Notificaciones Push de Firebase -->
+        <service
+            android:name=".network.RadarFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Descarga automática del módulo de escaneo de Google Play Services -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode_ui" />
+
+        <!-- Gestión de Usuarios (Solo Administrador) -->
+        <activity
+            android:name=".views.UsuariosActivity"
+            android:exported="false" />
+
+        <!-- Historial de Movimientos de Stock (Solo Administrador) -->
+        <activity
+            android:name=".views.MovimientosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Cambiar Mi Contraseña (Todos los roles) -->
+        <activity
+            android:name=".views.CambiarPasswordActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Registro de Ventas Rápidas -->
+        <activity
+            android:name=".views.VentaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Resumen de Ventas (Solo Administrador) -->
+        <activity
+            android:name=".views.ResumenActivity"
+            android:exported="false" />
+
+        <!-- Conteo Físico de Inventario (Solo Administrador) -->
+        <activity
+            android:name=".views.ConteoInventarioActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Inventario de Productos -->
+        <activity
+            android:name=".views.ProductosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Detalle de Producto -->
+        <activity
+            android:name=".views.DetalleProductoActivity"
+            android:exported="false" />
+
+        <!-- Formulario de Producto (Crear y Editar) -->
+        <activity
+            android:name=".views.ProductoFormActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Alertas de Stock y Vencimiento -->
+        <activity
+            android:name=".views.AlertasActivity"
+            android:exported="false" />
+
+        <!-- Crear Producto (Placeholder «Próximamente») -->
+        <activity
+            android:name=".views.CrearProductoActivity"
+            android:exported="false" />
+
+        <!-- Auditoría de Ventas por Vendedor (Solo Administrador) -->
+        <activity
+            android:name=".views.VentasVendedorActivity"
+            android:exported="false" />
+
+        <!-- Comparar Vendedores (Solo Administrador) -->
+        <activity
+            android:name=".views.CompararVendedoresActivity"
+            android:exported="false" />
+
+        <!-- FileProvider para compartir archivos CSV exportados sin permisos de almacenamiento -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <activity
             android:name=".MainActivity"

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RadarStock_Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+    android:layout_marginVertical="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Nombre del Producto -->
+        <TextView
+            android:id="@+id/tvNombreItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvSubtotalItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Bebida Coca-Cola Original 1.5L" />
+
+        <!-- Precio Unitario -->
+        <TextView
+            android:id="@+id/tvPrecioUnitarioItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreItem"
+            tools:text="$1.800 c/u" />
+
+        <!-- Subtotal -->
+        <TextView
+            android:id="@+id/tvSubtotalItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/navy_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$3.600" />
+
+        <!-- Fila de Controles: [-] [Cantidad] [+] -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrecioUnitarioItem">
+
+            <!-- Botón Restar -->
+            <ImageButton
+                android:id="@+id/btnRestar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_role_chip"
+                android:backgroundTint="#F1F5F9"
+                android:contentDescription="Restar una unidad"
+                android:padding="6dp"
+                android:src="@drawable/ic_remove"
+                app:tint="@color/text_primary" />
+
+            <!-- Cantidad en venta -->
+            <TextView
+                android:id="@+id/tvCantidadItem"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="2" />
+
+            <!-- Botón Sumar -->
+            <ImageButton
+                android:id="@+id/btnSumar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_role_chip"
+                android:backgroundTint="#F1F5F9"
+                android:contentDescription="Sumar una unidad"
+                android:padding="6dp"
+                android:src="@drawable/ic_add"
+                app:tint="@color/text_primary" />
+        </LinearLayout>
+
+        <!-- Botón Quitar del carrito -->
+        <ImageButton
+            android:id="@+id/btnQuitarItem"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Quitar producto de la venta"
+            android:padding="6dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/status_danger" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

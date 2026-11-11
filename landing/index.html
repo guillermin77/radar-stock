@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Stock | Control de Inventario y Alertas para Almacenes de Barrio</title>
+  <meta name="description" content="Aplicación Android para almacenes y minimarkets en Chile. Control de mermas por caducidad, agilidad en mostrador y prevención de desabastecimiento sin complicaciones.">
+  <meta name="theme-color" content="#0B1E3F">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
+  <!-- Hoja de Estilos Única y Pura -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       1. CABECERA (Header Sticky con Logo y Botón Siempre Visible)
+       ========================================================= -->
+  <header class="site-header" id="cabecera">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand" aria-label="Radar Stock - Volver al inicio">
+        <img src="img/logo.png" alt="Logo de Radar Stock" class="brand-logo" width="42" height="42">
+        <span class="brand-name">Radar Stock<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="header-nav" aria-label="Navegación principal">
+        <a href="#pilares" class="nav-link">Pilares</a>
+        <a href="#capturas" class="nav-link">Pantallas</a>
+        <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+        <a href="#instalacion" class="nav-link">Instalación</a>
+        <a href="#preguntas-frecuentes" class="nav-link">Preguntas</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <!-- Botón de descarga siempre visible en cabecera -->
+      <a href="downloads/radar-stock-v1.3.apk" download="radar-stock-v1.3.apk" class="btn-download-header" aria-label="Descargar Radar Stock versión 1.3 archivo APK">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+        </svg>
+        <span>Descargar app v1.3</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================
+         2. PORTADA (Hero)
+         ========================================================= -->
+    <section class="hero-section" id="inicio">
+      <div class="container hero-content">
+        <div class="hero-text-block">
+          <div class="hero-tag">
+            <span class="hero-tag-pulse" aria-hidden="true"></span>
+            <span>App para Android • Comercio Local</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Tu almacén al día, <span>sin mermas</span> ni quiebres de stock
+          </h1>
+          
+          <p class="hero-description">
+            Radar Stock es la herramienta móvil pensada para el mostrador de almacenes y minimarkets de barrio en Chile: mantén el control directo de las fechas de vencimiento, registra ventas rápidamente desde el celular y recibe avisos antes de quedarte sin mercadería.
+          </p>
+
+          <div class="hero-cta">
+            <a href="downloads/radar-stock-v1.3.apk" download="radar-stock-v1.3.apk" class="btn-primary-hero">
+              <span class="btn-hero-main-text">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+                Descargar Radar Stock
+              </span>
+              <span class="btn-hero-subtext">Versión 1.0 APK • Aprox. 8.4 MB</span>
+            </a>
+
+            <div class="hero-specs">
+              <div class="hero-spec-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#00E5A3" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Android 8.0 o superior</span>
+              </div>
+              <div class="hero-spec-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#00E5A3" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Uso sin costo de suscripción</span>
+              </div>
+              <div class="hero-spec-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#00E5A3" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Descarga directa segura</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-preview">
+          <div class="hero-phone-frame">
+            <img src="img/capturas/01-login.jpg" alt="Pantalla de inicio de sesión de Radar Stock" width="300" height="600" loading="eager">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. LOS TRES PILARES (Propuesta de Valor)
+         ========================================================= -->
+    <section class="section-pilares" id="pilares">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-pretitle">Propuesta de valor</p>
+          <h2 class="section-title">Diseñada para los desafíos reales de tu negocio</h2>
+          <p class="section-subtitle">
+            Radar Stock se estructura en torno a tres objetivos centrales orientados a cuidar el margen de ganancia y facilitar la atención diaria en el local.
+          </p>
+        </div>
+
+        <div class="grid-pilares">
+          <!-- Pilar 1 -->
+          <article class="card-pilar">
+            <div class="pilar-icon-wrap accent-caducidad" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/>
+              </svg>
+            </div>
+            <h3>Control de mermas por caducidad</h3>
+            <p>
+              El sistema monitorea las fechas de vencimiento de lácteos, embutidos y abarrotes perecibles, avisando con 15 días de anticipación para que puedas liquidar a tiempo o gestionar devoluciones antes de perder dinero en estantería.
+            </p>
+            <div class="pilar-meta">
+              <span>Objetivo: Evitar pérdidas por productos vencidos</span>
+            </div>
+          </article>
+
+          <!-- Pilar 2 -->
+          <article class="card-pilar">
+            <div class="pilar-icon-wrap accent-mostrador" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/>
+              </svg>
+            </div>
+            <h3>Agilidad en mostrador</h3>
+            <p>
+              Diseñada para operar con rapidez durante las horas punta. Puedes escanear códigos de barra con la cámara del celular o seleccionar productos con toques rápidos, descontando unidades del inventario de forma inmediata y sin trabas.
+            </p>
+            <div class="pilar-meta">
+              <span>Objetivo: Agilizar la fila y el registro de ventas</span>
+            </div>
+          </article>
+
+          <!-- Pilar 3 -->
+          <article class="card-pilar">
+            <div class="pilar-icon-wrap accent-stock" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/>
+              </svg>
+            </div>
+            <h3>Prevención de desabastecimiento</h3>
+            <p>
+              Establece niveles de stock mínimo y deseado para cada artículo. El radar detecta automáticamente cuando una mercadería entra en estado crítico o bajo, permitiéndote armar la lista de pedidos a proveedores antes de quedarte sin stock de alta rotación.
+            </p>
+            <div class="pilar-meta">
+              <span>Objetivo: Prevenir quiebres en productos clave</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. CAPTURAS DE LA APP
+         ========================================================= -->
+    <section class="section-capturas" id="capturas">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-pretitle">Interfaz de usuario</p>
+          <h2 class="section-title">Conoce Radar Stock por dentro</h2>
+          <p class="section-subtitle">
+            Pantallas limpias con tipografía clara y botones amplios pensados para ser utilizados cómodamente en la jornada de trabajo.
+          </p>
+        </div>
+
+        <div class="carousel-capturas">
+          <!-- Captura 1 -->
+          <article class="card-captura">
+            <div class="captura-image-wrapper">
+              <img src="img/capturas/01-login.jpg" alt="Pantalla de inicio de sesión de Radar Stock con selección de perfil" class="captura-img" loading="lazy" width="280" height="560">
+            </div>
+            <div class="captura-info">
+              <span class="captura-tag">Seguridad</span>
+              <h3 class="captura-titulo">Acceso por roles diferenciados</h3>
+              <p class="captura-desc">Perfiles protegidos para Administrador y Vendedor, asegurando que solo el dueño del local pueda editar precios o modificar stock maestro.</p>
+            </div>
+          </article>
+
+          <!-- Captura 2 -->
+          <article class="card-captura">
+            <div class="captura-image-wrapper">
+              <img src="img/capturas/02-menu.jpg" alt="Menú principal de Radar Stock con accesos a ventas, catálogo y alertas" class="captura-img" loading="lazy" width="280" height="560">
+            </div>
+            <div class="captura-info">
+              <span class="captura-tag">Navegación</span>
+              <h3 class="captura-titulo">Menú principal con alertas activas</h3>
+              <p class="captura-desc">Acceso en un solo toque a los módulos esenciales con un contador numérico en tiempo real sobre el botón de alertas pendientes.</p>
+            </div>
+          </article>
+
+          <!-- Captura 3 -->
+          <article class="card-captura">
+            <div class="captura-image-wrapper">
+              <img src="img/capturas/03-ventas.jpg" alt="Pantalla de ventas en mostrador de Radar Stock con lector de código de barras" class="captura-img" loading="lazy" width="280" height="560">
+            </div>
+            <div class="captura-info">
+              <span class="captura-tag">Operación</span>
+              <h3 class="captura-titulo">Registro veloz en mostrador</h3>
+              <p class="captura-desc">Escaneo de código de barras, teclado numérico directo y carrito de venta para atender sin demoras en momentos de alta afluencia.</p>
+            </div>
+          </article>
+
+          <!-- Captura 4 -->
+          <article class="card-captura">
+            <div class="captura-image-wrapper">
+              <img src="img/capturas/04-productos.jpg" alt="Catálogo de productos de Radar Stock con indicadores de inventario" class="captura-img" loading="lazy" width="280" height="560">
+            </div>
+            <div class="captura-info">
+              <span class="captura-tag">Catálogo</span>
+              <h3 class="captura-titulo">Gestión clara de inventario</h3>
+              <p class="captura-desc">Listado detallado de mercadería con su stock actual, parámetros mínimos y fechas de vencimiento con etiquetas legibles.</p>
+            </div>
+          </article>
+
+          <!-- Captura 5 -->
+          <article class="card-captura">
+            <div class="captura-image-wrapper">
+              <img src="img/capturas/05-alertas.jpg" alt="Centro de alertas de Radar Stock filtrando productos críticos y por vencer" class="captura-img" loading="lazy" width="280" height="560">
+            </div>
+            <div class="captura-info">
+              <span class="captura-tag">Supervisión</span>
+              <h3 class="captura-titulo">Radar de alertas priorizadas</h3>
+              <p class="captura-desc">Clasificación por gravedad: vencidos, agotados, críticos y por vencer, permitiendo reposición inmediata desde la misma pantalla.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. CÓMO FUNCIONA (En 3 Pasos)
+         ========================================================= -->
+    <section class="section-pasos" id="como-funciona">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-pretitle">Puesta en marcha</p>
+          <h2 class="section-title">¿Cómo funciona Radar Stock?</h2>
+          <p class="section-subtitle">
+            Tres pasos directos para incorporar el sistema al ritmo de tu negocio sin configuraciones complejas.
+          </p>
+        </div>
+
+        <div class="grid-pasos">
+          <article class="card-paso">
+            <div class="paso-numero">1</div>
+            <h3>Registra tus productos</h3>
+            <p>Ingresa tus artículos con su nombre, código de barra (o escaneo con cámara), stock inicial, margen mínimo deseado y fecha de vencimiento si corresponde.</p>
+          </article>
+
+          <article class="card-paso">
+            <div class="paso-numero">2</div>
+            <h3>Registra tus ventas al paso</h3>
+            <p>En el mostrador, cada venta descuenta de forma automática las existencias. Tanto tú como tus colaboradores pueden registrar ventas desde su propio celular.</p>
+          </article>
+
+          <article class="card-paso">
+            <div class="paso-numero">3</div>
+            <h3>Revisa tus alertas y repón a tiempo</h3>
+            <p>El radar te notifica si un producto bajó del stock mínimo o si está próximo a caducar. Podrás hacer pedidos a distribuidores con información certera.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. CÓMO INSTALAR EN ANDROID (En 4 Pasos Cortos)
+         ========================================================= -->
+    <section class="section-instalacion" id="instalacion">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-pretitle">Guía paso a paso</p>
+          <h2 class="section-title">Cómo instalar la app en tu teléfono Android</h2>
+          <p class="section-subtitle">
+            Radar Stock se distribuye en formato APK para instalación directa en dispositivos Android (versión 8.0 o superior). Solo sigue estos 4 sencillos pasos:
+          </p>
+        </div>
+
+        <div class="grid-instalacion">
+          <article class="card-instalacion">
+            <div class="instala-num">1</div>
+            <div class="instala-texto">
+              <h4>Descargar el archivo</h4>
+              <p>Presiona el botón de descarga en esta página para guardar <strong>radar-stock-v1.3.apk</strong> en la carpeta de descargas de tu teléfono.</p>
+            </div>
+          </article>
+
+          <article class="card-instalacion">
+            <div class="instala-num">2</div>
+            <div class="instala-texto">
+              <h4>Permitir app del navegador</h4>
+              <p>Si tu teléfono lo solicita, ve a <em>Ajustes</em> y activa el permiso «Permitir instalar aplicaciones de fuentes desconocidas» para tu navegador (Chrome u otro).</p>
+            </div>
+          </article>
+
+          <article class="card-instalacion">
+            <div class="instala-num">3</div>
+            <div class="instala-texto">
+              <h4>Abrir e instalar</h4>
+              <p>Toca la notificación de descarga finalizada o busca el archivo en tu carpeta <em>Descargas</em> y presiona <strong>Instalar</strong>.</p>
+            </div>
+          </article>
+
+          <article class="card-instalacion">
+            <div class="instala-num">4</div>
+            <div class="instala-texto">
+              <h4>Aceptar aviso de Play Protect</h4>
+              <p>Al ser una aplicación de distribución directa, Google Play Protect podría mostrar una advertencia estándar. Selecciona <strong>Instalar de todas formas</strong>.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="instalacion-cta-box">
+          <p>¿Listo para comenzar? Descarga el instalador directamente y prueba el sistema en tu local comercial.</p>
+          <a href="downloads/radar-stock-v1.3.apk" download="radar-stock-v1.3.apk" class="btn-download-header">
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+            </svg>
+            <span>Descargar instalador (8.4 MB)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. PREGUNTAS FRECUENTES (FAQ)
+         ========================================================= -->
+    <section class="section-faq" id="preguntas-frecuentes">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-pretitle">Dudas comunes</p>
+          <h2 class="section-title">Preguntas Frecuentes</h2>
+          <p class="section-subtitle">
+            Respuestas directas sobre la compatibilidad, el funcionamiento diario y los requerimientos de la app.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <!-- FAQ 1 -->
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span>¿Qué teléfono necesito para usar Radar Stock?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>La aplicación es compatible con cualquier celular o tablet Android con versión 8.0 (Oreo) o superior. Funciona de manera ágil incluso en dispositivos de gama de entrada con especificaciones modestas.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span>¿Pueden varios vendedores usar la app al mismo tiempo en el local?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí. La base de datos centralizada y la API manejan transacciones simultáneas con bloqueo a nivel de fila (InnoDB), lo que evita duplicidades o quiebres de inventario cuando múltiples personas atienden en mostrador a la vez.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span>¿La aplicación emite boletas electrónicas del SII?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Radar Stock es exclusivamente una herramienta de control de inventario físico, alerta de caducidades y gestión interna de ventas. No sustituye la máquina de boletas, la app e-Boleta ni ningún software de facturación tributaria avalado por el SII.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span>¿Cómo avisa si un producto está por vencer o agotarse?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>El sistema cuenta con un módulo de Radar con conteos en tiempo real y notificaciones locales en Android. Los avisos se clasifican por gravedad: vencidos, agotados (stock 0), críticos (25% o menos del deseado) y por vencer (15 días o menos antes de la caducidad).</p>
+            </div>
+          </details>
+
+          <!-- FAQ 5 -->
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span>¿Qué diferencia hay entre el perfil Administrador y Vendedor?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>El Administrador (dueño o encargado) tiene permisos totales para crear productos, modificar precios, reponer stock y ver todas las alertas. El Vendedor puede registrar ventas en mostrador y consultar alertas para informar al cliente o reponer, pero no puede editar el catálogo ni alterar precios.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. CONTACTO
+         ========================================================= -->
+    <section class="section-contacto" id="contacto">
+      <div class="container">
+        <div class="contacto-box">
+          <div class="contacto-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <h3>¿Consultas o sugerencias sobre el proyecto?</h3>
+          <p>
+            Si tienes dudas técnicas, comentarios sobre la app o requieres orientación para probarla en tu almacén, contáctanos directamente por correo o teléfono:
+          </p>
+
+          <div class="contacto-grid">
+            <!-- Correo Electrónico -->
+            <div class="contacto-card">
+              <span class="contacto-card-label">Correo Electrónico</span>
+              <a href="mailto:contacto@radarstock.shop" class="contacto-card-val">contacto@radarstock.shop</a>
+              <div class="contacto-actions">
+                <button type="button" class="btn-copy-email" id="btn-copy-email" aria-label="Copiar dirección de correo al portapapeles">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                  </svg>
+                  <span>Copiar correo</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Teléfono y WhatsApp -->
+            <div class="contacto-card">
+              <span class="contacto-card-label">Teléfono y WhatsApp</span>
+              <a href="tel:+56996464756" class="contacto-card-val">+56 9 96464756</a>
+              <div class="contacto-actions">
+                <a href="https://wa.me/56996464756?text=Hola,%20quisiera%20más%20información%20sobre%20Radar%20Stock" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" aria-label="Contactar por WhatsApp al +56 9 96464756">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.59.13.17 1.76 2.69 4.26 3.77.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       9. PIE DE PÁGINA (Footer con Nota Obligatoria SII)
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <!-- Nota legal expresa exigida -->
+      <div class="nota-sii-box">
+        <p class="nota-sii-titulo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          Aviso Tributario Importante
+        </p>
+        <p class="nota-sii-texto">
+          Radar Stock no reemplaza el sistema de emisión de documentos tributarios exigido por el SII. Es una herramienta estrictamente orientada al control de inventario, stock y prevención de mermas comerciales.
+        </p>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Radar Stock. Proyecto de gestión de inventario y stock para almacenes.</p>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#pilares">Pilares</a>
+          <a href="#instalacion">Cómo instalar</a>
+          <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       BARRA FLOTANTE MÓVIL (Sticky Bar para Descarga Rápida)
+       ========================================================= -->
+  <aside class="mobile-sticky-bar" aria-label="Acceso rápido a descarga de la aplicación">
+    <div class="mobile-sticky-info">
+      <span class="mobile-sticky-app">Radar Stock</span>
+      <span class="mobile-sticky-meta">v1.0 • 8.4 MB (APK)</span>
+    </div>
+    <a href="downloads/radar-stock-v1.3.apk" download="radar-stock-v1.3.apk" class="btn-mobile-sticky">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+      </svg>
+      <span>Descargar</span>
+    </a>
+  </aside>
+
+  <!-- Script mínimo JS Puro -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
+
+

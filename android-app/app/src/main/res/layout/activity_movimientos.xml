@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:orientation="vertical">
+
+    <!-- 1. Barra Superior Corporativa Azul Marino -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/RadarStock_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIconTint="@color/white"
+        app:title="Historial de Movimientos"
+        app:titleTextColor="@color/white" />
+
+    <!-- 2. Buscador por Nombre o Código de Barras -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="4dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBuscar"
+            style="@style/RadarStock_TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscar por producto o código..."
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@android:drawable/ic_menu_search"
+            app:startIconTint="@color/text_placeholder">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etBuscar"
+                style="@style/RadarStock_TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_body_large" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!-- 3. Filtros por Tipo de Movimiento (Todos, Ingresos, Conteos, Ajustes) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal"
+        android:paddingVertical="4dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupTipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTipoTodos"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Todos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTipoIngresos"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingresos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTipoConteos"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conteos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTipoAjustes"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajustes" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <!-- 4. Filtros por Rango de Fechas (Cualquiera, Hoy, 7 días, Este mes, Rango) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal"
+        android:paddingBottom="8dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFechaTodas"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Todas las fechas" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFechaHoy"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hoy" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFecha7Dias"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Últimos 7 días" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFechaMes"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Este mes" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFechaRango"
+                style="@style/RadarStock_Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rango..." />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <!-- 5. Contenido Principal: Lista, Cargando, Vacío y Error -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Lista Paginada -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMovimientos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            tools:listitem="@layout/item_movimiento" />
+
+        <!-- Indicador de Carga Inicial -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/accent_action"
+            android:visibility="gone" />
+
+        <!-- Estado Vacío -->
+        <LinearLayout
+            android:id="@+id/layoutVacio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="Sin movimientos"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="@color/text_placeholder" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sin movimientos registrados"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMensajeVacio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="No se encontraron movimientos con los filtros aplicados."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Estado de Error de Red -->
+        <LinearLayout
+            android:id="@+id/layoutError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="Error de conexión"
+                android:src="@android:drawable/stat_notify_error"
+                app:tint="@color/status_danger" />
+
+            <TextView
+                android:id="@+id/tvMensajeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="No se pudo cargar el historial de movimientos."
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReintentar"
+                style="@style/RadarStock_Button_Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/btn_height_compact"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="24dp"
+                android:text="Reintentar" />
+        </LinearLayout>
+
+        <!-- Barra de progreso de paginación (Cargar más al final) -->
+        <ProgressBar
+            android:id="@+id/pbPaginacion"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:indeterminateTint="@color/accent_action"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>
+

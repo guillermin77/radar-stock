@@ -1,13 +1,12 @@
 package com.radarstock.app.utils
 
+import com.radarstock.app.BuildConfig
+
 /**
- * Constantes globales de la aplicación
+ * Constantes globales de la aplicación.
+ * La dirección de la API depende del tipo de compilación:
+ * debug -> XAMPP local (10.0.2.2), release -> Hostinger (HTTPS).
  */
 object Constants {
-    /**
-     * Dirección base de la API en Apache XAMPP.
-     * En el emulador de Android Studio, 10.0.2.2 hace puente hacia el localhost de tu PC.
-     */
-    const val BASE_URL = "http://10.0.2.2/backend-api/"
+    val BASE_URL: String = BuildConfig.BASE_URL
 }
-

@@ -1,5 +1,5 @@
 # ==============================================================
-# RADAR STOCK - Seguridad Apache / LiteSpeed
+# RADAR STOCK - Seguridad Apache / LiteSpeed (Hostinger)
 # ==============================================================
 
 # 1. Bloquear acceso web directo a carpetas sensibles (config e includes)
@@ -8,13 +8,12 @@
     RewriteRule ^(config|includes)(/.*)?$ - [F,L]
 </IfModule>
 
-# 2. Bloquear acceso directo al archivo de logs
-<Files "error.log">
-    Require all denied
-</Files>
-
-# 3. Bloquear archivos ocultos (.htaccess, .env, etc.)
-<FilesMatch "^\.">
+# 2. Bloquear acceso web a archivos de logs, scripts SQL y documentación markdown
+<FilesMatch "\.(log|sql|md)$">
     Require all denied
 </FilesMatch>
 
+# 3. Bloquear archivos ocultos (.htaccess, .env, .git, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

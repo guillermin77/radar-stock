@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayoutVenta"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Barra Superior / Encabezado Corporativo Azul Marino -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarVenta"
+            style="@style/RadarStock_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/white"
+            app:subtitle="Toque un producto para agregar (+1)"
+            app:subtitleTextColor="#CCFFFFFF"
+            app:title="Registro de Ventas"
+            app:titleTextColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Fila Horizontal de Categorías (con opción 'Todas') -->
+        <HorizontalScrollView
+            android:id="@+id/scrollCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/screen_margin_horizontal"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/toolbarVenta">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCategorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true" />
+        </HorizontalScrollView>
+
+        <!-- Cuadrícula de Productos (GridLayoutManager de 2 columnas) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProductosGrid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="6dp"
+            android:paddingBottom="@dimen/list_bottom_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollCategorias"
+            tools:listitem="@layout/item_producto_grid" />
+
+        <!-- Indicador de Paginación -->
+        <ProgressBar
+            android:id="@+id/pbPaginacion"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="90dp"
+            android:indeterminateTint="@color/navy_primary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="gone" />
+
+        <!-- Indicador de Carga Inicial -->
+        <ProgressBar
+            android:id="@+id/pbCargando"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="@color/navy_primary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollCategorias"
+            tools:visibility="gone" />
+
+        <!-- Vista de Error de Conexión -->
+        <LinearLayout
+            android:id="@+id/layoutError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollCategorias"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvMensajeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No se pudo conectar con el catálogo."
+                android:textColor="@color/status_danger"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReintentarCarga"
+                style="@style/RadarStock_Button_Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Reintentar" />
+        </LinearLayout>
+
+        <!-- Barra Fija Inferior con Resumen (Tocar para desplegar detalle) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBarraInferior"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/navy_primary"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="10dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <!-- Ícono de Carrito -->
+                <ImageView
+                    android:id="@+id/ivIconoCarrito"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:contentDescription="Carrito de venta"
+                    android:src="@drawable/ic_cart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+                <!-- Resumen de Cantidad -->
+                <TextView
+                    android:id="@+id/tvCantidadResumen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="0 unidades"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconoCarrito"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="3 productos (5 un.)" />
+
+                <!-- Monto Total Grande -->
+                <TextView
+                    android:id="@+id/tvTotalResumen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="$0"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconoCarrito"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCantidadResumen"
+                    tools:text="$12.500" />
+
+                <!-- Botón 'Ver detalle' Dorado con texto azul oscuro -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gold_pill"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver detalle"
+                        android:textColor="@color/text_on_gold"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:contentDescription="Abrir detalle"
+                        android:src="@drawable/ic_expand_less"
+                        app:tint="@color/text_on_gold" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

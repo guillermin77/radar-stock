@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar Superior Corporativo -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/RadarStock_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/white"
+            app:title="Conteo de Inventario"
+            app:titleTextColor="@color/white" />
+
+        <!-- Panel de Búsqueda y Escáner -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RadarStock_Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding">
+
+                <!-- Botón de Escáner Verde Corporativo -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEscanearCodigo"
+                    style="@style/RadarStock_Button_Scan"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Escanear Código de Barras"
+                    app:icon="@drawable/ic_barcode_scanner"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp" />
+
+                <!-- Buscador por Nombre con Autocompletado -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilBuscarProducto"
+                    style="@style/RadarStock_TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="Buscar producto por nombre..."
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@android:drawable/ic_menu_search"
+                    app:startIconTint="@color/text_placeholder">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actvBuscarProducto"
+                        style="@style/RadarStock_TextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionThreshold="1"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Barra Resumen de Productos en el Conteo -->
+        <LinearLayout
+            android:id="@+id/layoutResumenBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTotalItemsConteo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Productos en conteo: 0" />
+
+            <TextView
+                android:id="@+id/tvTotalConDiferencias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_placeholder"
+                android:textSize="12sp"
+                tools:text="Con diferencias: 0" />
+        </LinearLayout>
+
+        <!-- Contenedor de Lista / Estado Vacío -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1">
+
+            <!-- RecyclerView del Conteo -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvConteoProductos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp"
+                tools:listitem="@layout/item_conteo_producto" />
+
+            <!-- Estado Vacío -->
+            <LinearLayout
+                android:id="@+id/layoutConteoVacio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="32dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:alpha="0.4"
+                    android:contentDescription="Sin productos"
+                    android:src="@android:drawable/ic_menu_agenda"
+                    app:tint="@color/text_placeholder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:text="No hay productos en el conteo"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="Escanea el código de barras o busca por nombre arriba para agregarlos al conteo."
+                    android:textColor="@color/text_placeholder"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Indicador de Carga Inicial del Catálogo -->
+            <ProgressBar
+                android:id="@+id/pbCargandoCatalogo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/navy_primary"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <!-- Barra Inferior de Guardado -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="8dp"
+            app:strokeColor="@color/border_card"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <ProgressBar
+                    android:id="@+id/pbGuardando"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:indeterminateTint="@color/navy_primary"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardarConteo"
+                    style="@style/RadarStock_Button_Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/btn_height"
+                    android:text="Guardar Conteo" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

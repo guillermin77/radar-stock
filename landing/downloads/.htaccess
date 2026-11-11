@@ -1,0 +1,3 @@
+# Permitir la descarga directa de archivos APK con el tipo MIME correcto de Android
+AddType application/vnd.android.package-archive .apk
+

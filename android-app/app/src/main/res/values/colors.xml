@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Paleta Corporativa Radar Stock -->
+    <color name="primary">#1E3A8A</color>              <!-- Azul marino corporativo (barras y encabezados) -->
+    <color name="navy_primary">#1E3A8A</color>         <!-- Alias azul marino corporativo -->
+    <color name="primary_gradient_end">#1E40AF</color> <!-- Azul marino degradado para encabezado del menú -->
+    <color name="accent_action">#2563EB</color>        <!-- Azul de acción (botones principales y foco) -->
+    <color name="blue_action">#2563EB</color>          <!-- Alias azul de acción -->
+    <color name="accent_gold">#C9A44C</color>          <!-- Dorado de acento (decorativo) -->
+    <color name="gold_accent">#C9A44C</color>          <!-- Alias dorado de acento -->
+    <color name="accent_gold_dark">#92722A</color>     <!-- Dorado oscuro para bordes y detalles sutiles -->
+
+    <!-- Textos -->
+    <color name="text_primary">#0F172A</color>         <!-- Texto principal de alto contraste -->
+    <color name="text_secondary">#475569</color>       <!-- Texto secundario y etiquetas -->
+    <color name="text_placeholder">#64748B</color>     <!-- Placeholders e iconos secundarios -->
+    <color name="text_on_primary">#FFFFFF</color>      <!-- Texto sobre fondo azul oscuro -->
+    <color name="text_on_gold">#1E3A8A</color>         <!-- Texto sobre fondo dorado (azul marino oscuro) -->
+
+    <!-- Superficies y Fondos -->
+    <color name="bg_app">#F1F5F9</color>               <!-- Fondo general de todas las pantallas -->
+    <color name="surface_card">#FFFFFF</color>         <!-- Fondo de tarjetas y contenedores -->
+    <color name="border_subtle">#CBD5E1</color>        <!-- Borde sutil de tarjetas y campos de texto -->
+    <color name="border_card">#CBD5E1</color>          <!-- Alias borde de tarjetas -->
+    <color name="divider">#E2E8F0</color>              <!-- Líneas divisoras -->
+
+    <!-- Estados Semánticos (Inventario, Alertas y Conteo) -->
+    <color name="status_success">#15803D</color>       <!-- Verde para Escanear, Activo, Diferencia 0 -->
+    <color name="status_success_bg">#DCFCE7</color>    <!-- Fondo verde claro -->
+    <color name="status_danger">#B91C1C</color>        <!-- Rojo oscuro para inactivo, agotado, vencido -->
+    <color name="status_danger_bg">#FEE2E2</color>     <!-- Fondo rojo claro -->
+    <color name="status_warning">#C2410C</color>       <!-- Naranja oscuro para stock crítico -->
+    <color name="status_warning_bg">#FFEDD5</color>    <!-- Fondo naranja claro -->
+    <color name="status_amber">#B45309</color>         <!-- Ámbar oscuro para bajo y por vencer -->
+    <color name="status_amber_bg">#FEF3C7</color>      <!-- Fondo ámbar claro -->
+    <color name="status_blue">#2563EB</color>          <!-- Azul para stock sobrante -->
+    <color name="status_blue_bg">#DBEAFE</color>       <!-- Fondo azul claro -->
+
+    <!-- Básicos -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

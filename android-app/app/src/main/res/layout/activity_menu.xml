@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_app"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ========================================================== -->
+        <!-- ENCABEZADO CON DEGRADADO AZUL MARINO Y BORDES DE 24DP       -->
+        <!-- ========================================================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu_header"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_margin_horizontal"
+            android:paddingTop="32dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/tvBienvenida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido de vuelta,"
+                android:textColor="#BFDBFE"
+                android:textSize="@dimen/text_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNombreUsuario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_large"
+                    android:textStyle="bold"
+                    tools:text="Administrador" />
+
+                <!-- Chip del Rol con fondo translúcido -->
+                <TextView
+                    android:id="@+id/tvRolUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_role_chip"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold"
+                    tools:text="Rol: Administrador" />
+            </LinearLayout>
+
+            <!-- Filete dorado decorativo -->
+            <View
+                android:layout_width="48dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/accent_gold" />
+        </LinearLayout>
+
+        <!-- ========================================================== -->
+        <!-- CONTENIDO PRINCIPAL: CUADRÍCULA DE OPERACIONES DEL ALMACÉN -->
+        <!-- ========================================================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_margin_horizontal"
+            android:paddingTop="18dp"
+            android:paddingBottom="28dp">
+
+            <TextView
+                android:id="@+id/tvTituloOperaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Operaciones del Almacén"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/text_subtitle"
+                android:textStyle="bold" />
+
+            <!-- Fila 1 de Cuadrícula: Venta y Productos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVenta"
+                    style="@style/RadarStock_Button_MenuCard"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/menu_card_height"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:layout_gravity="top"
+                    android:text="Venta"
+                    app:icon="@android:drawable/ic_menu_agenda" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnProductos"
+                    style="@style/RadarStock_Button_MenuCard"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/menu_card_height"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_gravity="top"
+                    android:text="Productos"
+                    app:icon="@android:drawable/ic_menu_view" />
+            </LinearLayout>
+
+            <!-- Fila 2 de Cuadrícula: Alertas -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_between_cards"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAlertas"
+                    style="@style/RadarStock_Button_MenuCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/menu_alertas_height"
+                    android:gravity="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="Alertas"
+                    app:icon="@android:drawable/ic_popup_reminder" />
+            </LinearLayout>
+
+            <!-- ========================================================== -->
+            <!-- BLOQUE ADMINISTRACIÓN (Separado visualmente en Tarjeta)     -->
+            <!-- ========================================================== -->
+            <LinearLayout
+                android:id="@+id/layoutAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTituloAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Administración"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_subtitle"
+                    android:textStyle="bold" />
+
+                <!-- Fila 1 Admin: Resumen de ventas y Usuarios -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResumenVentas"
+                        style="@style/RadarStock_Button_MenuCard"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/menu_card_height"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:layout_gravity="top"
+                        android:text="Resumen de ventas"
+                        app:icon="@android:drawable/ic_menu_recent_history" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUsuarios"
+                        style="@style/RadarStock_Button_MenuCard"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/menu_card_height"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:layout_gravity="top"
+                        android:text="Usuarios"
+                        app:icon="@android:drawable/ic_menu_myplaces" />
+                </LinearLayout>
+
+                <!-- Fila 2 Admin: Escáner y Conteo de inventario -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_between_cards"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEscaner"
+                        style="@style/RadarStock_Button_MenuCard"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/menu_card_height"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:layout_gravity="top"
+                        android:text="Escáner"
+                        app:icon="@android:drawable/ic_menu_camera" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConteoInventario"
+                        style="@style/RadarStock_Button_MenuCard"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/menu_card_height"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:layout_gravity="top"
+                        android:text="Conteo de inventario"
+                        app:icon="@android:drawable/ic_menu_edit" />
+                </LinearLayout>
+
+                <!-- Fila 3 Admin: Historial de Movimientos de Stock -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_between_cards"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnMovimientos"
+                        style="@style/RadarStock_Button_MenuCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/menu_alertas_height"
+                        android:gravity="center"
+                        android:text="Historial de movimientos"
+                        app:icon="@android:drawable/ic_menu_recent_history" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ========================================================== -->
+            <!-- ACCIONES DE CUENTA Y SESIÓN                                -->
+            <!-- ========================================================== -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="18dp"
+                android:background="@color/divider" />
+
+            <!-- Botón Cambiar Mi Contraseña (Contorno Azul de Alto Contraste) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCambiarPassword"
+                style="@style/RadarStock_Button_Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:text="Cambiar mi contraseña" />
+
+            <!-- Botón Cerrar Sesión (Contorno Rojo Oscuro de Alto Contraste) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesion"
+                style="@style/RadarStock_Button_Destructive"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginTop="12dp"
+                android:text="Cerrar sesión" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
